@@ -16,6 +16,7 @@ function agregarFila(medico) {
   let celdaEspecialidad = fila.insertCell();
   let celdaConsultorio = fila.insertCell();
   let celdaCorreo = fila.insertCell();
+  let celdaTelefono = fila.insertCell();
   let celdaPasientes = fila.insertCell();
 
   celdanombreMed.textContent = medico.nombreMedico
@@ -24,6 +25,7 @@ function agregarFila(medico) {
   celdaEspecialidad.textContent = medico.especialidad;
   celdaConsultorio.textContent = medico.consultorio;
   celdaCorreo.textContent = medico.correo;
+  celdaTelefono.textContent = medico.telefono
   celdaPasientes.textContent = medico.pacientes
 }
 
