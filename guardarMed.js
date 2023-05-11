@@ -11,6 +11,35 @@ formularioMedicos.addEventListener('submit', (event) => {
     especialidad: document.getElementById('especialidad').value
   }
   //console.log(datosMascota)
-  const jsonDatosMed = JSON.stringify(datosMedicos)
-  console.log(jsonDatosMed)
+  guardarCookies(datosMedicos)
 })
+
+function guardarCookies(medico) {
+  //las cookies antiguas
+  let datos = obtenerCookie("medico");
+  if (datos === "") {
+    datos = "[]";
+  }
+  //objeto
+  const medObjetos = JSON.parse(datos);
+  //añadir nuevas
+  medObjetos.push(medico);
+  const jsonDatos = JSON.stringify(medObjetos)
+  cambiarCookie("medico", jsonDatos)
+
+}
+
+function obtenerCookie(nombre) {
+  const cookies = document.cookie.split("; ")
+  for (let i = 0; i < cookies.length; i++) {
+    const cookie = cookies[i].split("=");
+    if (cookie[0] === nombre) {
+      return decodeURIComponent(cookie[1]);
+    }
+  }
+  return "";
+}
+
+function cambiarCookie(nombre, valor) {
+  document.cookie = `${nombre}=${encodeURIComponent(valor)}`;
+}
