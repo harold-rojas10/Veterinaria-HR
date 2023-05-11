@@ -11,6 +11,12 @@ formularioMascotas.addEventListener('submit', (event) => {
   }
   //console.log(datosMascota)
   guardarCookies(datosMascota)
+  const confirmacion = confirm("¿Desea ver los datos?")
+    if(confirmacion == true){
+        window.location.href = "mascotas.html"
+    }else{
+        formularioMascotas.reset()
+    }
 })
 
 function guardarCookies(mascota) {

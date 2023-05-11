@@ -12,6 +12,12 @@ formularioMedicos.addEventListener('submit', (event) => {
   }
   //console.log(datosMascota)
   guardarCookies(datosMedicos)
+  const confirmacion = confirm("¿Desea ver los datos?")
+  if (confirmacion == true) {
+    window.location.href = "medicos.html"
+  } else {
+    formularioMedicos.reset()
+  }
 })
 
 function guardarCookies(medico) {
