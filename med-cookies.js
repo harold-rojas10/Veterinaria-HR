@@ -2,6 +2,7 @@ let tablaMedico = document.getElementById("tabla-medicos");
 let cuerpoTabla = tablaMedico.querySelector("tbody");
 
 const jsonDatos = JSON.parse(obtenerCookie("medico"))
+const mascotasCookie = JSON.parse(obtenerCookie('mascotas') || "[]");
 
 for (let i = 0; i < jsonDatos.length; i++) {
   let registro = jsonDatos[i]
@@ -17,7 +18,7 @@ function agregarFila(medico) {
   let celdaConsultorio = fila.insertCell();
   let celdaCorreo = fila.insertCell();
   let celdaTelefono = fila.insertCell();
-  let celdaPasientes = fila.insertCell();
+  //let celdaPasientes = fila.insertCell();
 
   celdanombreMed.textContent = medico.nombreMedico
   celdaapellidoMed.textContent = medico.apellidoMedico;
@@ -26,7 +27,20 @@ function agregarFila(medico) {
   celdaConsultorio.textContent = medico.consultorio;
   celdaCorreo.textContent = medico.correo;
   celdaTelefono.textContent = medico.telefono
-  celdaPasientes.textContent = medico.pacientes
+  //celdaPasientes.textContent = medico.pacientes
+
+  let mascotasEncontradas = mascotasCookie.filter(mascota => medico.especialidad === mascota.especialidad);
+  if (mascotasEncontradas.length > 0) {
+    const medicoMascota = fila.insertCell();
+    medicoMascota.innerHTML = `<ul id="pacientes"></ul>`
+    const pacientes = medicoMascota.querySelector("#pacientes")
+    mascotasEncontradas.forEach(mascota => {
+      pacientes.innerHTML += `<li>${mascota.nombreMascota}</li>`;
+    });
+  } else {
+    const medicoMascota = fila.insertCell();
+    medicoMascota.textContent = "Sin pacientes";
+  }
 }
 
 function obtenerCookie(nombre) {
